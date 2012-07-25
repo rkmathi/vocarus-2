@@ -1,55 +1,14 @@
-<!DOCTYPE HTML>
-<!--[if lt IE 9]><html class="ie" lang="ja"><![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="ja"><!--<![endif]-->
-<head>
-<meta charset="utf-8">
-<title>vocarus - 利用規約</title>
-<meta name="description" content="vocarusは、あなたのアップロードされたボーカロイドファイルに自動で構成音からコードを推定し4つのコーラスパートを生成して手軽に表現豊かな楽曲制作を達成します。最大3つのコーラスパートをダウンロードすることができます。">
-<meta name="keywords" content="vocarus, ぼからす, vocaloid, ボーカロイド, ボーカロイド UGC">
+{% extends "_layout.html" %}
 
-<!--[if lt IE 9]>
-<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-
-<link href="../css/style.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-33231731-1']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
+{% block header_and_script %}{% endblock %}
 </head>
 
 <body>
-<div id="wrapper">
+  <div id="wrapper"><!-- div#wrapper -->
+{% block wrapper_header %}{% endblock %}
 
-<header id="header" class="clearfix">
-<h1 id="title"><a href="/"><img src="../images/vocarus.png" alt="vocarus"></a></h1>
-<nav>
-<div class="nav1">
-<a href="service.html" class="nv"><img src="../images/minimiku40.png" alt="vocarusについて" width="40px" height="40px" class="centered"></a>
-<p class="nowrap">vocarusについて</p>
-</div>
-<div class="nav2">
-<a href="howtouse.html" class="nv"><img src="../images/chibimiku40.png" alt="使い方" width="40px" height="40px" class="centered"></a>
-<p class="nowrap">使い方</p>
-</div>
-<div class="nav3">
-<a href="contact.html" class="nv"><img src="../images/contact.png" alt="コンタクト" width="40px" height="40px" class="centered"></a>
-<p class="nowrap">コンタクト</p>
-</div>
-</nav>
-</header>
-<!-- main -->
-<div id="main" class="clearfix">
+{% block wrapper_main %}
+<div id="main" class="clearfix"><!-- main -->
 	<h2>vocarus利用規約</h2>
 	<section class="explanation">
     <div class="expl4"><p>vocarusでは、vocarus利用規約に同意いただいた方に、無料で提供させていただくサービスです。<br>従いまして、ユーザーの皆様は、当サイトのWebサービスをご利用頂く上で下記の規約に承諾していただいたとみなさせていただきますのでご注意ください。<br>本規約は、vocarus開発チーム(以下「当チーム」)が独自に規定するものであり、当チームの運営する「vocarus」(以下当チームの運営するWebサイト」)が提供するサービス(以下「本サービス」)に適用されるものとします。</p>
@@ -114,40 +73,10 @@
 利用規約は平成24年7月9日から発効するものとします。</p>
     </div>
     </section>
-</div>
-<!-- main fin -->
-<footer id="footer" class="clearfix">
-  <section class="twitter_features footer_bg">
-    <div class="footer_contents">
-      <a href="https://twitter.com/#!/voca_rus">
-        <img src="images/twitter.png" alt="Twitter">
-      </a>
-      <p class="text_footer">Follow us</p>
-    </div>
-  </section>
-  
-  <section class="facebook_features footer_bg">
-    <div class="footer_contents">
-    <a href="http://facebook.com/vocarus">
-      <img src="images/facebook.png" alt="Facebook">
-    </a>
-      <p class="text_footer">Facebook</p>
-    </div>
-  </section> 
-  <section class="itf_features footer_bg">
-    <div class="footer_contents">
-      <a href="http://www.coins.tsukuba.ac.jp/">
-        <img src="images/coins.png" alt="情報科学類" width="150px" height="40px">
-      </a>
-      <p class="text_footer">情報科学類</p>
-      <a href="http://www.mast.tsukuba.ac.jp/">
-        <img src="images/mast.png" alt="情報メディア創成学類" width="150px" height="40px">
-      </a>
-      <p class="text_footer">情報メディア創成学類</p>
-    </div>
-  </section>
-  <span class="subspan">※「VOCALOID」、「ボーカロイド」はヤマハ株式会社の登録商標です。</span>
-</footer>
-</div>
+</div><!-- main fin -->
+{% endblock %}
+
+{% block wrapper_footer %}{% endblock %}
+  </div><!-- div#wrapper -->
 </body>
 </html>

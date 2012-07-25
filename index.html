@@ -1,0 +1,93 @@
+{% extends "_layout.html" %}
+
+{% block header_and_script %}
+  <script type="text/javascript" src="http://api.html5media.info/1.1.4/html5media.min.js"></script>
+  <script type="text/javascript" src="js/fileupload.js"></script>
+{% endblock %}
+</head>
+
+<body>
+  <div id="wrapper"><!-- div#wrapper -->
+{% block wrapper_header %}{% endblock %}
+
+{% block wrapper_main %}
+    <div id="main" class="clearfix"><!-- #main -->
+      <section class="miku">
+      <div class="miku_image"><img src="images/miku.png" alt="ミク"></div>
+      </section>
+
+      <section class="exp">
+      <h3>自動コーラスパート生成サービス</h3>
+      <p class="expl">vocarusは、あなたがアップロードしたvsqファイルから、構成音よりコードを自動推定し最大で３つのコーラスパートを生成するWebアプリケーションです。<br />表現豊かで手軽な楽曲制作をお手伝いします。</p>
+      <p class="expl">
+      <span class="alertspan">
+        ■現在はVOCALOID&trade;2 Editorで生成されるファイル(vsq)のみに対応していますが、今後VOCALOID&trade;3 Editorにも対応していく予定です。
+      </span>
+      </p>
+      </section>
+
+      <section class="new">
+      <h2><img src="images/whnew.png" alt="What's new?"></h2>
+      <div class="sub_content content_bg">
+        <dl>
+          <dt>2012.07.17</dt>
+          <dd>&nbsp;&nbsp;IE8の動作に対応しました</dd>
+          <dt>2012.07.16</dt>
+          <dd>&nbsp;&nbsp;IE9、Safariなどの動作に対応しました</dd>
+          <dt>2012.07.10</dt>
+          <dd>&nbsp;&nbsp;文章、デモソングを修正しました</dd>
+          <dt>2012.07.09</dt>
+          <dd>&nbsp;&nbsp;vocarus Major Scale（長調）版公開！！</dd>
+        </dl>
+      </div>
+      </section>
+    </div><!-- #main fin -->
+
+    <section class="demo"><!-- section.demo -->
+    <h2><img src="images/demo.png" alt="Demo"></h2>
+    <div class="demo_content content_bg">
+      <p>曲名:夕焼小焼</p>
+      <p class="audio_text">vocarus使用前</p>
+      <audio class="bubble" controls>
+      <source src="audio/yuuyake_before.ogg" type="audio/ogg">
+      <source src="audio/yuuyake_before.mp3" type="audio/mpeg">
+      <p>このブラウザはAudio要素に対応していません</p>
+      </audio>
+      <p class="audio_text">vocarus使用後</p>
+      <audio class="bubble" controls>
+      <source src="audio/yuuyake_after.ogg" type="audio/ogg">
+      <source src="audio/yuuyake_after.mp3" type="audio/mpeg">
+      <p>このブラウザはAudio要素に対応していません</p>
+      </audio>
+    </div>
+    </section><!-- section.demo fin -->
+
+    <section class="create clearfix"><!-- section.create_clearfix -->
+    <h2><img src="images/create.png" alt="Create!"></h2>
+    <div class="create_content content_bg">
+      <form  name="parts" action="/parse" enctype="multipart/form-data" id="hand" method="post">
+        <div id="upload">
+          <img src="images/folder.png" id="upload_image">
+          <input type="file" id="upload_form" class="file" name="file">
+          <input type="reset" id="reset" value="リセット" />
+        </div>
+        <p>ファイル選択<span class="alertspan"> ファイル名は、半角英数のみを用いてください。</span></p>
+
+        <div id="service" class="footer_bg">
+          <div id="files_info"></div>
+        </div>
+        <p class="left">詳細は<a href="howtouse.html">使い方のページ</a>をお読みください。</p>
+        <p class="download">
+        <input type="submit" name="chorus1" value="コーラス1">
+        <input type="submit" name="chorus2" value="コーラス2">
+        <input type="submit" name="chorus3" value="コーラス3">
+        </p>
+      </form>
+    </div>
+    </section><!-- section.create_clearfix fin -->
+{% endblock %}
+
+{% block wrapper_footer %}{% endblock %}
+  </div><!-- div#wrapper fin -->
+</body>
+</html>

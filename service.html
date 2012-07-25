@@ -1,64 +1,18 @@
-<!DOCTYPE HTML>
-<!--[if lt IE 9]><html class="ie" lang="ja"><![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="ja"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>vocarus</title>
-  <meta name="description" content="vocarusは、あなたがアップロードしたvsqファイルから、自動で構成音よりコードを推定し3つのコーラスパートを生成することができます。手軽に表現豊かな楽曲制作の達成をお手伝いします。">
-  <meta name="keywords" content="vocarus, ぼからす, vocaloid, ボーカロイド, ボーカロイドUGC">
-  <!--[if lt IE 9]>
-  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
+{% extends "_layout.html" %}
 
-  <link href="../css/style.css" rel="stylesheet" type="text/css">
+{% block header_and_script %}
   <script type="text/javascript" src="http://api.html5media.info/1.1.4/html5media.min.js"></script>
-  <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
-  <script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-33231731-1']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-  </script>
+{% endblock %}
 </head>
 
 
 <body>
 <div id="wrapper"><!-- div#wrapper -->
-<header id="header" class="clearfix"><!-- #header -->
-    <h1 id="title"><a href="/"><img src="../images/vocarus.png" alt="vocarus"></a></h1>
-  <nav>
-    <div class="nav1">
-      <a href="service.html" class="nv">
-        <img src="../images/minimiku40.png" alt="vocarusについて" class="centered">
-      </a>
-      <p class="nowrap">vocarusについて</p>
-    </div>
+{% block wrapper_header %}{% endblock %}
 
-    <div class="nav2">
-      <a href="howtouse.html" class="nv">
-        <img src="../images/chibimiku40.png" alt="使い方" class="centered">
-      </a>
-      <p class="nowrap">使い方</p>
-    </div>
-
-    <div class="nav3">
-      <a href="contact.html" class="nv">
-        <img src="../images/contact.png" alt="コンタクト" class="centered">
-      </a>
-      <p class="nowrap">コンタクト</p>
-    </div>
-  </nav>
-</header><!-- #header fin -->
-
-
+{% block wrapper_main %}
 <div id="main" class="clearfix"><!-- #main -->
   <h2>vocarusについて</h2>
-
   <section class="explanation">
     <h3 class="expl">自動でコーラスパートを生成します</h3>
     <div class="expl2">
@@ -71,15 +25,15 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
     <p>曲名: シャボン玉</p>
     <p class="service_text">vocarus使用前</p>
     <audio class="service_audio" controls>
-      <source src="../audio/bubble_before.ogg" type="audio/ogg">
-      <source src="../audio/bubble_before.mp3" type="audio/mpeg">
+      <source src="audio/bubble_before.ogg" type="audio/ogg">
+      <source src="audio/bubble_before.mp3" type="audio/mpeg">
       <p>このブラウザはAudio要素に対応していません</p>
     </audio>
     
     <p class="service_text">vocarus使用後</p>
     <audio class="service_audio" controls>
-      <source src="../audio/bubble_after.ogg" type="audio/ogg">
-      <source src="../audio/bubble_after.mp3" type="audio/mpeg">
+      <source src="audio/bubble_after.ogg" type="audio/ogg">
+      <source src="audio/bubble_after.mp3" type="audio/mpeg">
       <p>このブラウザはAudio要素に対応していません</p>
     </audio>
   </div>
@@ -95,14 +49,14 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
     <p>曲名: ロンドン橋</p>
     <p class="service_text">vocarus使用前</p>
     <audio class="service_audio" controls>
-      <source src="../audio/rondon_before.ogg" type="audio/ogg">
-      <source src="../audio/rondon_before.mp3" type="audio/mpeg">
+      <source src="audio/rondon_before.ogg" type="audio/ogg">
+      <source src="audio/rondon_before.mp3" type="audio/mpeg">
       <p>このブラウザはAudio要素に対応していません</p>
     </audio>
     <p class="service_text">vocarus使用後</p>
     <audio class="service_audio" controls>
-      <source src="../audio/rondon_after.ogg" type="audio/ogg">
-      <source src="../audio/rondon_after.mp3" type="audio/mpeg">
+      <source src="audio/rondon_after.ogg" type="audio/ogg">
+      <source src="audio/rondon_after.mp3" type="audio/mpeg">
       <p>このブラウザはAudio要素に対応していません</p>
     </audio>
   </div>
@@ -146,45 +100,21 @@ var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga
     <p>曲名: 茶摘み</p>
     <p class="service_text">vocarus使用前</p>
     <audio class="service_audio" controls>
-      <source src="../audio/chatsumi_before.ogg" type="audio/ogg">
-      <source src="../audio/chatsumi_before.mp3" type="audio/mpeg">
+      <source src="audio/chatsumi_before.ogg" type="audio/ogg">
+      <source src="audio/chatsumi_before.mp3" type="audio/mpeg">
       <p>このブラウザはAudio要素に対応していません</p>
     </audio>
     <p class="service_text">vocarus使用後</p>
     <audio class="service_audio" controls>
-      <source src="../audio/chatsumi_after.ogg" type="audio/ogg">
-      <source src="../audio/chatsumi_after.mp3" type="audio/mpeg">
+      <source src="audio/chatsumi_after.ogg" type="audio/ogg">
+      <source src="audio/chatsumi_after.mp3" type="audio/mpeg">
       <p>このブラウザはAudio要素に対応していません</p>
     </audio>
   </div>
 </div><!-- #main fin -->
+{% endblock %}
 
-
-<footer id="footer" class="clearfix"><!-- #footer -->
-  <section class="twitter_features footer_bg">
-    <div class="footer_contents">
-      <a href="https://twitter.com/#!/voca_rus"><img src="../images/twitter.png" alt="Twitter"></a>
-      <p class="text_footer">Follow us</p>
-    </div>
-  </section>
-  
-  <section class="facebook_features footer_bg">
-    <div class="footer_contents">
-      <a href="http://facebook.com/vocarus"><img src="../images/facebook.png" alt="Facebook"></a>
-      <p class="text_footer">Facebook</p>
-    </div>
-  </section>
-  
-  <section class="itf_features footer_bg">
-    <div class="footer_contents">
-      <a href="http://www.coins.tsukuba.ac.jp/"><img src="../images/coins.png" alt="情報科学類"></a>
-      <p class="text_footer">情報科学類</p>
-      <a href="http://www.mast.tsukuba.ac.jp/"><img src="../images/mast.png" alt="情報メディア創成学類"></a>
-      <p class="text_footer">情報メディア創成学類</p>
-    </div>
-  </section>
-  <span class="subspan">VOCALOID&trade;はヤマハ株式会社の登録商標です。</span>
-</footer><!-- #footer fin -->
+{% block wrapper_footer %}{% endblock %}
 </div><!-- div#wrapper -->
 </body>
 </html>
