@@ -25,9 +25,6 @@ handlers:
 - url: /audio
   static_dir: audio
 
-- url: /static
-  static_dir: static
-
 - url: .*
   script: main.py
 
