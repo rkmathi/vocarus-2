@@ -1,0 +1,190 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 9]><html class="ie" lang="ja"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="ja"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>vocarus</title>
+  <meta name="description" content="vocarusは、あなたがアップロードしたvsqファイルから、自動で構成音よりコードを推定し3つのコーラスパートを生成することができます。手軽に表現豊かな楽曲制作の達成をお手伝いします。">
+  <meta name="keywords" content="vocarus, ぼからす, vocaloid, ボーカロイド, ボーカロイドUGC">
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../css/style.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="http://api.html5media.info/1.1.4/html5media.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-33231731-1']);
+_gaq.push(['_trackPageview']);
+
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+  </script>
+</head>
+
+
+<body>
+<div id="wrapper"><!-- div#wrapper -->
+<header id="header" class="clearfix"><!-- #header -->
+    <h1 id="title"><a href="/"><img src="../images/vocarus.png" alt="vocarus"></a></h1>
+  <nav>
+    <div class="nav1">
+      <a href="service.html" class="nv">
+        <img src="../images/minimiku40.png" alt="vocarusについて" class="centered">
+      </a>
+      <p class="nowrap">vocarusについて</p>
+    </div>
+
+    <div class="nav2">
+      <a href="howtouse.html" class="nv">
+        <img src="../images/chibimiku40.png" alt="使い方" class="centered">
+      </a>
+      <p class="nowrap">使い方</p>
+    </div>
+
+    <div class="nav3">
+      <a href="contact.html" class="nv">
+        <img src="../images/contact.png" alt="コンタクト" class="centered">
+      </a>
+      <p class="nowrap">コンタクト</p>
+    </div>
+  </nav>
+</header><!-- #header fin -->
+
+
+<div id="main" class="clearfix"><!-- #main -->
+  <h2>vocarusについて</h2>
+
+  <section class="explanation">
+    <h3 class="expl">自動でコーラスパートを生成します</h3>
+    <div class="expl2">
+    	<p>vocarusは、あなたがアップロードしたvsqファイルからコードを自動推定しコーラスパートを生成するWebアプリケーションです。<br />アップロードされたファイルから主旋律を読み取り、調及びコードを推定し、その結果に基づいてコーラスパートを組み立てる処理を行います。</p>
+        <span class="alertspan">※当Webページで使用されるイラストは<a href="http://piapro.jp/license/pcl/summary">ピアプロ・キャラクターライセンス</a>に基づいてクリプトン・フューチャー・メディア株式会社のキャラクター「初音ミク」を描いたものです。</span>
+    </div>
+  </section>
+
+  <div class="content_bg service_demo">
+    <p>曲名: シャボン玉</p>
+    <p class="service_text">vocarus使用前</p>
+    <audio class="service_audio" controls>
+      <source src="../audio/bubble_before.ogg" type="audio/ogg">
+      <source src="../audio/bubble_before.mp3" type="audio/mpeg">
+      <p>このブラウザはAudio要素に対応していません</p>
+    </audio>
+    
+    <p class="service_text">vocarus使用後</p>
+    <audio class="service_audio" controls>
+      <source src="../audio/bubble_after.ogg" type="audio/ogg">
+      <source src="../audio/bubble_after.mp3" type="audio/mpeg">
+      <p>このブラウザはAudio要素に対応していません</p>
+    </audio>
+  </div>
+
+  <section class="explanation">
+    <h3 class="expl">筑波大学ボーカロイドプロジェクトについて</h3>
+    <div class="expl2"><p>vocarusは、一般の人々によって作成されるコンテンツの創作支援を目的とした、DTM-UGC(User-Generated Content)創作支援プロジェクトが運営しています。<br/>同プロジェクトは昨年度から始まった筑波大学の情報科学類・情報メディア創成学類の特別演習（２年次集中）の１つのテーマとして開設されていました。<br>今後は、さらに幅広く表現豊かな楽曲制作を支援するために、オートコーラスMinor Scale（短調）版サポート、VOCALOID3 Editor対応等を予定しています。</p>
+    
+    </div>
+  </section>
+
+  <div class="content_bg service_demo">
+    <p>曲名: ロンドン橋</p>
+    <p class="service_text">vocarus使用前</p>
+    <audio class="service_audio" controls>
+      <source src="../audio/rondon_before.ogg" type="audio/ogg">
+      <source src="../audio/rondon_before.mp3" type="audio/mpeg">
+      <p>このブラウザはAudio要素に対応していません</p>
+    </audio>
+    <p class="service_text">vocarus使用後</p>
+    <audio class="service_audio" controls>
+      <source src="../audio/rondon_after.ogg" type="audio/ogg">
+      <source src="../audio/rondon_after.mp3" type="audio/mpeg">
+      <p>このブラウザはAudio要素に対応していません</p>
+    </audio>
+  </div>
+
+  <section class="left">
+    <h3 class="expl">開発者</h3>
+    <div class="expl2">
+      <p>vocarus開発者一覧です。<br />Twitterアカウント or ハンドルネームとなっています。</p>
+      <p>&nbsp;</p>
+      <p>第一期</p>
+      <table width="450" cellspacing="3px" class="expl3">
+        <tr>
+          <td width="150">伊東翼</td>
+          <td width="150">大野誠</td>
+          <td width="150"><a href="https://twitter.com/AmatsukiKu">@AmatsukiKu</a></td>
+        </tr>
+        <tr>
+          <td><a href="https://twitter.com/lithtle">@lithtle</a></td>
+          <td><p> - </p></td>
+          <td><p> - </p></td>
+        </tr>
+      </table>
+      <p>第二期</p>
+      <table width="450" cellspacing="3px" class="expl3">
+        <tr>
+          <td width="150"><span>神武</span></td>
+          <td width="150"><a href="https://twitter.com/esparra_gos">@esparra_gos</a></td>
+          <td width="150"><a href="https://twitter.com/rkmathi">@rkmathi</a></td>
+        </tr>
+      </table>
+      <p>イラスト</p>
+      <table width="300" cellspacing="3px" class="expl3">
+        <tr>
+        <td><a href="http://www.pixiv.net/member.php?id=22438">飯田のぎ(芸術専門学群)</a></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <div class="content_bg service_demo">
+    <p>曲名: 茶摘み</p>
+    <p class="service_text">vocarus使用前</p>
+    <audio class="service_audio" controls>
+      <source src="../audio/chatsumi_before.ogg" type="audio/ogg">
+      <source src="../audio/chatsumi_before.mp3" type="audio/mpeg">
+      <p>このブラウザはAudio要素に対応していません</p>
+    </audio>
+    <p class="service_text">vocarus使用後</p>
+    <audio class="service_audio" controls>
+      <source src="../audio/chatsumi_after.ogg" type="audio/ogg">
+      <source src="../audio/chatsumi_after.mp3" type="audio/mpeg">
+      <p>このブラウザはAudio要素に対応していません</p>
+    </audio>
+  </div>
+</div><!-- #main fin -->
+
+
+<footer id="footer" class="clearfix"><!-- #footer -->
+  <section class="twitter_features footer_bg">
+    <div class="footer_contents">
+      <a href="https://twitter.com/#!/voca_rus"><img src="../images/twitter.png" alt="Twitter"></a>
+      <p class="text_footer">Follow us</p>
+    </div>
+  </section>
+  
+  <section class="facebook_features footer_bg">
+    <div class="footer_contents">
+      <a href="http://facebook.com/vocarus"><img src="../images/facebook.png" alt="Facebook"></a>
+      <p class="text_footer">Facebook</p>
+    </div>
+  </section>
+  
+  <section class="itf_features footer_bg">
+    <div class="footer_contents">
+      <a href="http://www.coins.tsukuba.ac.jp/"><img src="../images/coins.png" alt="情報科学類"></a>
+      <p class="text_footer">情報科学類</p>
+      <a href="http://www.mast.tsukuba.ac.jp/"><img src="../images/mast.png" alt="情報メディア創成学類"></a>
+      <p class="text_footer">情報メディア創成学類</p>
+    </div>
+  </section>
+  <span class="subspan">VOCALOID&trade;はヤマハ株式会社の登録商標です。</span>
+</footer><!-- #footer fin -->
+</div><!-- div#wrapper -->
+</body>
+</html>

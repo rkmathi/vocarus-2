@@ -1,6 +1,5 @@
+*~
 *.py[co]
-
-# Packages
 *.egg
 *.egg-info
 dist
@@ -12,16 +11,16 @@ var
 sdist
 develop-eggs
 .installed.cfg
-
-# Installer logs
 pip-log.txt
-
-# Unit test / coverage reports
 .coverage
 .tox
+.project
+.pydevproject
+.settings
 
-#Translations
-*.mo
+Icon?
+.DS_Store*
+Thumbs.db
 
-#Mr Developer
-.mr.developer.cfg
+/audio/*
+/images/*
