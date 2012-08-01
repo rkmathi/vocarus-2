@@ -1,7 +1,3 @@
-#-*- coding: utf-8 -*-
-
-import pprint
-from struct import *
 
 #歌詞=>発音記号の変換テーブル
 phonetic_table = {
@@ -38,9 +34,6 @@ phonetic_table = {
 
         u"てゃ": u"t' a", u"てぃ": u"t' i", u"てゅ": u"t' M", u"てぇ": u"t' e", u"てょ": u"t' o"
     }
-
-#発音記号=>歌詞（ひらがな）の変換テーブル
-lyric_table = dict(zip(phonetic_table.values(), phonetic_table.keys()))
 
 
 #ローマ字の歌詞が入力されたとき用に更新
@@ -81,131 +74,14 @@ phonetic_table.update({
     u"tha": u"t' a", u"thi": u"t' i", u"thu": u"t' M", u"the": u"t' e", u"tho": u"t' o", # てゃてぃてゅてぇてょ
     })
 
+
+#発音記号=>歌詞（ひらがな）の変換テーブル
+lyric_table = dict(zip(phonetic_table.values(), phonetic_table.keys()))
+
+
 #その他の歌詞が挿入された場合
 phonetic_table.update({
-    u"-": u"a", u"ー": u"a", u"−": u"a",  # 伸ばし棒 
+    u"-": u"a", u"ー": u"a", u"−": u"a",  # 伸ばし棒
     u"s": u"s", u"m": u"m"
     })
-
-
-def pp(obj):
-    """オブジェクトを綺麗に表示する
-
-    Args:
-        obj: 任意のオブジェクト
-    """
-    pp = pprint.PrettyPrinter(indent=4, width=180)
-    str = pp.pformat(obj)
-    print str
-
-
-def pp_str(obj):
-    """整形したオブジェクトの文字列を返す
-
-    Args:
-        obj: 任意のオブジェクト
-    Returns:
-        整形された文字列
-    """
-    pp = pprint.PrettyPrinter(indent=4, width=180)
-    return pp.pformat(obj)
-
-
-def get_dtime(fp):
-    """デルタタイムを取得する
-
-    fpはデルタタイムのところまでシークしておく必要がある
-
-    Args:
-        fp: vsqファイルポインタ or FakeFile インスタンス
-    Returns:
-        デルタタイム
-    """
-    byte = ord(fp.read(1))
-    dtime = byte & 0x7f
-    while byte & 0x80:
-        dtime <<= 7
-        byte = ord(fp.read(1))
-        dtime += byte & 0x7f
-    return dtime
-
-
-def dtime2binary(dtime):
-    """デルタタイムをバイナリに変換する
-    Args:
-        dtime:デルタタイム
-    Returns:
-        デルタタイムのバイナリ
-    """
-    bins = []
-    calc_1b = lambda b: (b & 0x7f) | 0x80 if bins else b & 0x7f
-    while dtime > 0x00:
-        b = calc_1b(dtime)
-        bins.insert(0, b)
-        dtime >>= 7
-    binary = pack(str(len(bins)) + "B", *bins) if bins else "\x00"
-    return binary
-
-
-def lyric2phonetic(lyric):
-    """歌詞を発音記号に変換する
-
-    Args:
-        lyric: 歌詞（ひらがな or ローマ字）(unicode)
-    Returns:
-        発音記号(unicode)
-    """
-    try:
-        phonetic = phonetic_table[lyric]
-    except KeyError:
-        phonetic = u"a"
-    return phonetic
-
-
-def phonetic2lyric(phonetic):
-    """発音記号を歌詞に変換する
-
-    Args:
-        phonetic: 発音記号（unicode）
-    Returns:
-        歌詞（ひらがな）（unicode）
-    """
-    try:
-        lyric = lyric_table[phonetic]
-    except KeyError:
-        lyric = u"あ"
-    return lyric
-
-
-class FakeFile(object):
-    """文字列アクセスをファイルアクセスのように動作させるクラス
-
-    """
-    def __init__(self, string=""):
-        """
-        Args:
-            string: 対象文字列
-        """
-        self._string = string
-        self._index = 0
-
-    def read(self, byte):
-        """文字列を読み出す
-
-        Args:
-            byte: 読み出すbyte数
-        Returns:
-            読み出した文字列
-        """
-        string = self._string[self._index:self._index + byte]
-        self._index += byte
-        return string
-
-    def tell(self):
-        """現在の読み出し開始インデックスを返す
-
-        Returns:
-            現在の読み出し開始インデックス
-        """
-        return self._index
 

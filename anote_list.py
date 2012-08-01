@@ -6,16 +6,18 @@ import tools
 
 class AnoteList(list):
     """Anoteインスタンスを格納するリスト
+
     ルール適用の際に、正規表現を使うので、
     歌詞上のインデックス <=> AnoteList上のインデックス
     みたいな処理がある
+
     Inherits:
         list
     Attributes:
         lyrics: 格納されているAnoteインスタンス間の歌詞を連結したもの
         phonetic: 格納されているAnoteインスタンス間の発音記号を連結したもの
         relative_notes: 格納されているAnoteインスタンス間の相対音階
-    Exaples:
+    Examples:
         anotes = AnoteList()
         antoes.append(Anote(1000, 64, u"あ"))
         anotes.append(Anote(100, 62, u"が")) # ソートされて先頭にくる
@@ -23,21 +25,24 @@ class AnoteList(list):
         anotes.phonetics => "g aa"
         anotes.relative_notes => [0, 2]
     """
-    
+
     def __init__(self, other_list=[]):
         """コンストラクタ
+
         Args:
             other_list: 他のAnoteインスタンスが入ったリスト、またはAnoteList
         """
         super(AnoteList, self).__init__()
         self.extend(other_list)
-    
+
     def append(self, anote):
         """Anoteインスタンスを追加する
+
         リストのappend()と同じ挙動。追加時に、
             ・型のチェック（Anoteインスタンスであるか）
             ・時間順ソート
             ・歌詞が伸ばし棒関連の場合の処理
+
         Args:
             anote: 追加するAnoteインスタンス
         """
@@ -57,18 +62,20 @@ class AnoteList(list):
             next = self.index(_anote) + 1
             if self[next].is_prolong:
                 self[next].phonetic = _anote.phonetic[-1]
-    
+
     def extend(self, other_list):
         """他のAnoteインスタンスのリスト、AnoteListを連結する
+
         Args:
             other_list: 他のAnoteインスタンスのリスト、またはAnoteList
         """
         for anote in other_list:
             self.append(anote)
-    
+
     def filter(self, start=None, end=None,
             lyric_start=None, lyric_end=None):
         """フィルタリングを行う
+
         Args:
             start: 選択始端時間
             end: 選択終端時間
@@ -88,16 +95,17 @@ class AnoteList(list):
         temp = self[l2i(lyric_s):l2i(lyric_e)]
         temp = [a for a in temp if s <= a.end and a.start <= e]
         return AnoteList(temp)
-    
+
     def filter2(self, formula):
         return AnoteList(filter(formula, self))
-    
+
     def map(self, formula):
         map(formula, self)
         return self
-    
+
     def lyric_index(self, anote):
         """歌詞文字列上のインデックスを取得する
+
         Args:
             anote: 対象となるanote
         Returns:
@@ -114,15 +122,16 @@ class AnoteList(list):
         i = self.index(anote)
         string = u''.join([a.lyric for a in self[:i]])
         return i + len(re.findall(u"[ぁぃぅぇぉゃゅょ]", string))
-    
+
     def __lyric_index2index(self, i):
         return i - len(re.findall(u"[ぁぃぅぇぉゃゅょ]", self.lyrics[:i]))
-    
+
     def __getslice__(self, i, j):
         return AnoteList(super(AnoteList, self).__getslice__(i, j))
-    
+
     def split(self, distance=50):
         """distance時間以上離れているAnoteで区切る
+
         Args:
             distance: 区切る場所となる音符間の時間間隔
         Returns:
@@ -136,15 +145,15 @@ class AnoteList(list):
                 buf = i + 1
         anote_lists.append(self[buf:])
         return anote_lists
-    
+
     @property
     def lyrics(self):
         return u''.join([a.lyric for a in self])
-    
+
     @property
     def phonetics(self):
         return u''.join([a.phonetic for a in self])
-    
+
     @property
     def relative_notes(self):
         return [0] + [a.note-self[i].note for i,a in enumerate(self[1:])]

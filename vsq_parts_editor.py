@@ -11,6 +11,10 @@ from google.appengine.api import memcache
 import datetime
 
 class JST(datetime.tzinfo):
+    """Time zone class
+
+    JST(Japan Standard Time)
+    """
     def utcoffset(self,dt):
         return datetime.timedelta(hours=9)
     def dst(self,dt):
@@ -18,22 +22,25 @@ class JST(datetime.tzinfo):
     def tzname(self,dt):
         return "JST"
 
+
 class VsqPartsEditor(object):
     """パートの操作をするクラス
+
     """
-    
+
     def __init__(self, part, filename=None, binary=None):
         if filename:
             self.parse(part, filename=filename)
         elif binary:
             self.parse(part, binary=binary)
-    
+
     @property
     def anotes(self):
         return self.current_track.anotes
-    
+
     def parse(self, part, filename=None, binary=None):
         """VSQファイルをパースする
+
         Args:
             part: part data
             filename: VSQファイルのパス
@@ -61,9 +68,10 @@ class VsqPartsEditor(object):
             et = track.anotes[-1].end
             self.end_time = max(et, self.end_time)
         self.select_track(0)
-    
+
     def unparse(self, filename=None):
         """現在のデータをアンパースして、VSQファイルとして書きこむ
+
         Args:
             filename: 書き込むVSQファイルのパス
         Returns:
@@ -87,9 +95,10 @@ class VsqPartsEditor(object):
             open(filename, 'w').write(binary)
         else:
             return binary
-    
+
     def select_track(self, n):
         """操作対象トラックを変更する
+
         Args:
             n: トラック番号
         """

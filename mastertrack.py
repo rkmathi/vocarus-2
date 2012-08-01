@@ -5,6 +5,7 @@ from struct import *
 
 class MasterTrack(object):
     """vsqファイル中のマスタートラック部分を扱うクラス
+
     Attributes:
         data: トラック情報を表すディクショナリ
             {"MTrk": トラックチャンクを表す文字列"MTrk",
@@ -28,6 +29,7 @@ class MasterTrack(object):
 
     def parse(self, fp):
         """vsqファイルのマスタートラック部分をパースする
+
         Args:
             fp: vsqファイルポインタ or FakeFile インスタンス
         fpはマスタートラック部分までシークしておく必要がある
@@ -61,6 +63,7 @@ class MasterTrack(object):
 
     def unparse(self):
         """マスタートラックをアンパースする
+
         Returns:
             マスタートラックバイナリ
         """
@@ -79,3 +82,4 @@ class MasterTrack(object):
             elif t == 0x58:  # Beat
                 binary += pack('4b', *self.beat)
         return binary
+

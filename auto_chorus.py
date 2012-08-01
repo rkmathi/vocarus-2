@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import copy
 import anote_list
 import anote
-import copy
 
-# DUMMY Method
 def execAutoChorus(anotes):
+    """DUMMY METHOD
+
+    This dummy method is deprecated and not used.
+    """
     result = []
     for part in range(0, 4):
         result.append(copy.deepcopy(anotes))

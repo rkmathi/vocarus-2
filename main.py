@@ -38,11 +38,13 @@ class ContentPage3(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 
+""" agreement.html
 class ContentPage4(webapp.RequestHandler):
     def get(self):
         template_values = {}
         path = os.path.join(os.path.dirname(__file__), 'agreement.html')
         self.response.out.write(template.render(path, template_values))
+"""
 
 
 class ParseError1(webapp.RequestHandler):
@@ -84,7 +86,6 @@ class ParsePage(webapp.RequestHandler):
                     time=3600)
             template_values = {
                     'parts' : parts,
-                    # For DEBUG
                     'editor' : editor,
                     'dd' : 2 ** editor.dd}
             variable.nn = editor.nn
@@ -100,7 +101,7 @@ class ParsePage(webapp.RequestHandler):
             template_values = { }
             path = os.path.join(os.path.dirname(__file__), 'parse_notfound.html')
             self.response.out.write(template.render(path, template_values))
-        except (ValueError): # Too Big!
+        except (ValueError): # Too big!
             template_values = { }
             path = os.path.join(os.path.dirname(__file__), 'parse_toobig.html')
             self.response.out.write(template.render(path, template_values))

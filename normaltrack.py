@@ -15,6 +15,7 @@ import main
 
 class NormalTrack(object):
     """ノーマルトラック（マスタートラック以外）を扱うクラス
+
     Attributes:
         data: データ
         anotes: 音符イベントのリスト
@@ -22,13 +23,13 @@ class NormalTrack(object):
         phonetics: 各音符イベントの発音記号を連結したもの
         lyrics: 各音符イベントの歌詞を連結したもの
     """
-    
+
     def __init__(self, fp, nn, dd, part):
         self.parse(fp)
         self._nn = nn
         self._dd = 2**dd
         self._part = part
-    
+
     def __parse_text(self, text):
         data = {
             "Common": {},
@@ -85,7 +86,7 @@ class NormalTrack(object):
             data['DynamicsBPList'] = {'time': 0, 'value': 0}
         data['EOS'] = data['Events'].pop('EOS')['time']
         return data
-    
+
     def __unparse_text(self):
         #テキスト情報
         data = self.data
@@ -126,9 +127,10 @@ class NormalTrack(object):
             #for item in data[tag]:
             #    text += "%(time)d=%(value)d\n" % item
         return text
-    
+
     def __pack_events(self, events, details):
         """イベントを扱いやすいようにpackする
+
         Args:
             events: イベント情報（ID#xxxxタグ以下の情報）のリスト
             details: 詳細イベント情報（h#xxxxタグ以下の徐放）のリスト
@@ -161,9 +163,10 @@ class NormalTrack(object):
         anotes.sort(key=lambda x: x.start)
         singers.sort(key=lambda x: x.start)
         return anotes, singers
-    
+
     def __unpack_events(self, anotes, singers):
         """unpackする
+
         Args:
             anotes: 音符イベントのリスト
             singers: 歌手変更イベントのリスト
@@ -171,7 +174,6 @@ class NormalTrack(object):
             events: イベント情報（ID#xxxxタグ以下の情報）のリスト
             details: イベント詳細情報（h#xxxxタグ以下の情報）のリスト
         """
-
         soprano_notes = []
         for i in range(0, len(anotes)):
             soprano_notes.append(anotes[i].note)
@@ -195,12 +197,14 @@ class NormalTrack(object):
                 details.append(p.singer_event)
             events.append(e)
         return events, details
-    
+
     def parse(self, fp):
         """vsqファイルのノーマルトラック部分をパースする
+
+        fpはノーマルトラックのところまでシークしておく必要がある
+
         Args:
             fp: vsqファイルポインタ or FakeFileインスタンス
-        fpはノーマルトラックのところまでシークしておく必要がある
         """
         #トラックチャンクヘッダの解析
         data = {
@@ -231,9 +235,10 @@ class NormalTrack(object):
         self.data = data
         self.anotes = anotes
         self.singers = singers
-    
+
     def unparse(self):
         """ノーマルトラックをアンパースする
+
         Returns:
             ノーマルトラックバイナリ
         """

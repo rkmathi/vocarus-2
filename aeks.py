@@ -5,7 +5,7 @@ import copy
 
 def pentatonic(code, note_list):
     note_names = {'c':0, 'cis':1, 'd':2, 'dis':3, 'e':4, 'f':5,
-                 'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
+                  'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
     inter2 = [2, 2, 3, 2, 0]
     count = 0
     for i in range(0, len(note_list)):
@@ -16,8 +16,10 @@ def pentatonic(code, note_list):
             tmp += inter2[k]
     return count
 
+
 def aeks(notes):
-    """Automatic Estimation of Key Signature
+    """Automatic Estimation of Key Signature(AEKS)
+
     Args:
         notes: Soprano notes (IntegerList)
     Returns:
@@ -32,13 +34,13 @@ def aeks(notes):
     note_name  = ['c', 'cis', 'd', 'dis', 'e', 'f',
                   'fis', 'g', 'gis', 'a', 'b', 'h']
     note_names = {'c':0, 'cis':1, 'd':2, 'dis':3, 'e':4, 'f':5,
-                 'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
+                  'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
     note_occur = {'c':0, 'cis':0, 'd':0, 'dis':0, 'e':0, 'f':0,
                   'fis':0, 'g':0, 'gis':0, 'a':0, 'b':0, 'h':0}
 
     # Count times that notes appear.
     for n in notes:
-        note_occur[note_name[(n)%12]] += 1 # +7
+        note_occur[note_name[(n)%12]] += 1
 
     # Make dictionary sorted.
     note_sorted = sorted(note_occur.items(),
@@ -53,11 +55,11 @@ def aeks(notes):
         else:
             pass
 
-# !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! #
+# !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! #
     #print "note2_list==>",note2_list,"<br/>"
     #for i in range(0, 7):
     #    print "note_names[note2_list[",i,"][0]]",note_names[note2_list[i][0]],"<br />"
-# !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! #
+# !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! #
 
     max = [-1, -1]
     for i in range(0, len(note2_list)):
@@ -76,3 +78,4 @@ def aeks(notes):
 
     key = max[0] + 1
     return key
+
