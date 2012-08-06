@@ -73,30 +73,44 @@ class ParsePage(webapp.RequestHandler):
             """
             file_name = self.request.body_file.vars['file'].filename.encode('utf-8')
             #parts = self.request.get('parts')
+            is_score = False
+            
             if self.request.POST.has_key('chorus1'):
                 parts = 1
             elif self.request.POST.has_key('chorus2'):
                 parts = 2
             elif self.request.POST.has_key('chorus3'):
                 parts = 3
-            editor = VsqPartsEditor(parts, binary = data)
-            memcache.set_multi(
+            elif self.request.POST.has_key('lyric_card'):
+                parts = 0
+                is_score = True
+
+            if is_score == True:
+                editor = VsqPartsEditor(parts, binary =data)
+                self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
+                self.response.headers['Content-disposition'] = (
+                u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u'.txt')
+                self.response.out.write(editor.generate_chordtext())
+            else:
+                editor = VsqPartsEditor(parts, binary = data)
+                memcache.set_multi(
                     {"editor": editor, "name": file_name, "part": parts},
                     key_prefix="vsq_",
                     time=3600)
-            template_values = {
+                template_values = {
                     'parts' : parts,
                     'editor' : editor,
                     'dd' : 2 ** editor.dd}
-            variable.nn = editor.nn
-            variable.dd = 2**editor.nn
+                variable.nn = editor.nn
+                variable.dd = 2**editor.nn
             #path = os.path.join(os.path.dirname(__file__), 'parse.html')
             #self.response.out.write(template.render(path, template_values))
             # !!! Download !!!
-            self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
-            self.response.headers['Content-disposition'] = (
-                u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u' [part.%d].vsq' % parts)
-            self.response.out.write(editor.unparse())
+                
+                self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
+                self.response.headers['Content-disposition'] = (
+                    u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u' [part.%d].vsq' % parts)
+                self.response.out.write(editor.unparse())
         except (AttributeError): # No files except
             template_values = { }
             path = os.path.join(os.path.dirname(__file__), 'parse_notfound.html')
