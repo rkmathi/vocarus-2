@@ -30,7 +30,7 @@ def execAutoChorus_dumy(anotes):
 
 #引数はanotes, 調, 分子, 分母
 def execAutoChorus(anotes ,key, numerator, denominator):
-    minimumunit = 1920 / numerator  #分解脳を拍子の分母で割りますー(全音＝1920)
+    minimumunit = 1920 / denominator  #分解脳を拍子の分母で割りますー(全音＝1920)
     qNList = noteQuantization(anotes, minimumunit)
     hamList = melodyrestoration(anotes, qNList, key, denominator, numerator)
     MChord.autoChord(hamList)
@@ -216,8 +216,9 @@ def mapping(anoteList, hamList, minimumunit): #まっぴんぐ♪
         #                                         note[3].getNoteNumber()
 
         for part in range(0, 4):
-            result[part][i].note = hamList[ham_cnt+nexco].note[part].getNoteNumber()
-            #result[part][i].note = hamList[ham_cnt+0].note[part].getNoteNumber()
+            if hamList[ham_cnt+nexco].note[part].getNoteNumber() != -1:
+                result[part][i].note = hamList[ham_cnt+nexco].note[part].getNoteNumber()
+                #result[part][i].note = hamList[ham_cnt+0].note[part].getNoteNumber()
 
     return result
 
