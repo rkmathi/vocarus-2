@@ -1,11 +1,22 @@
-vocarus-2
-=========
+# vocarus-2 #
 
-* vocarus ver. 2
+## Change Log ##
 
-since 2012/07/25 ・ω・
+2012/08/06
+
+> Lyric & Code output function
+
+2012/07/25
+
+> Deploy vocarus ver. 2
+
+2012/07/09
+
+> Deploy vocarus ver. 1
 
 
-* vocarus ver. 1
+### vocarus ver. 2 ###
+> since 2012/07/25 ・ω・
 
-since 2012/07/09 ・ω・
+### vocarus ver. 1 ###
+> since 2012/07/09 ・ω・
