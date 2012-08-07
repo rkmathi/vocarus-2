@@ -27,7 +27,7 @@ class LyricCard(object):
         self.__chord_and_length()
 
     def __chord_and_length(self):
-        self._minimumunit = 1920 / self._nn  #分解脳を拍子の分母で割りますー(全音＝1920)
+        self._minimumunit = 1920 / self._nn  #分解脳を拍子の分母(?)で割りますー(全音＝1920)
         qNList = noteQuantization(self._anotes, self._minimumunit)
         hamList = melodyrestoration(self._anotes, qNList, self._key, self._dd, self._nn)
         MChord.autoChord(hamList)
@@ -108,8 +108,13 @@ class LyricCard(object):
     def __list_chord(self):
         measure = []
         beat = 0
+        pre_chord = -1 # init
         for CL in self._CLList:
-            measure.append(self.__convert_scale(CL['Chord']))
+            if pre_chord != CL['Chord']:
+                measure.append(self.__convert_scale(CL['Chord']))
+                pre_chord = CL['Chord']
+            else: # when previous chord is same
+                measure.append(' ')
             for L in range(CL['Length']):
                 beat += 1
                 if L != 0:
