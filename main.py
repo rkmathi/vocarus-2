@@ -2,7 +2,6 @@
 
 import os
 import logging
-import variable
 import simplejson as json
 from google.appengine.ext import webapp
 from google.appengine.api import memcache
