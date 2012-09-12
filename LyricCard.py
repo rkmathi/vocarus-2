@@ -3,13 +3,12 @@
 import anote_list
 import anote
 import copy
-import sys
-import CTone
-import CHarmony
-import CQuantizedNote
-import MUnderThree
-import MChord
-from MAutoChorus import *
+import autochorus.CTone
+import autochorus.CHarmony
+import autochorus.CQuantizedNote
+import autochorus.MUnderThree
+import autochorus.MChord
+from autochorus.MAutoChorus import *
 from aeks import aeks
 
 class LyricCard(object):

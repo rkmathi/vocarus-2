@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import re
-import sys
-sys.path.append('auto_chorus/')
 import tools
 from anote import *
 from singer import *
 from struct import *
-from MAutoChorus import execAutoChorus
+from autochorus.MAutoChorus import execAutoChorus
 from aeks import aeks
 from vsq_parts_editor import *
 import variable

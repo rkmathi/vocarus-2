@@ -6,8 +6,8 @@ from normaltrack import *
 from mastertrack import *
 from header import *
 from struct import *
-from MAutoChorus import *
-from LyricCard import *
+from autochorus.MAutoChorus import *
+from lyriccard import *
 from google.appengine.api import mail
 from google.appengine.api import memcache
 import datetime
