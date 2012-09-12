@@ -2,7 +2,6 @@
 
 import copy
 import re
-import tools
 
 class AnoteList(list):
     """Anoteインスタンスを格納するリスト

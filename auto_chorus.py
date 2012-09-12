@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import anote_list
-import anote
 
 def execAutoChorus(anotes):
     """DUMMY METHOD

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import copy
 import re
 import tools
 from anote_list import *

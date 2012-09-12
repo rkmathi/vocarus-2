@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import sys
-import copy
-
 def majorpentatonic(code, note_list):
     note_names = {'c':0, 'cis':1, 'd':2, 'dis':3, 'e':4, 'f':5,
                  'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
