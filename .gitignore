@@ -2,6 +2,7 @@
 *.py[co]
 *.egg
 *.egg-info
+*.swp
 dist
 build
 eggs
