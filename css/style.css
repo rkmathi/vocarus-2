@@ -132,6 +132,14 @@ footer section {
     left:80px;
 }
 
+.luka_image {
+    width:319px;
+    height:629px;
+    position:relative;
+    top:-20px;
+    left:70px;
+}
+
 nav {
   width:473px;
   float:left;
