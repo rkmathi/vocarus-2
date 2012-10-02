@@ -1,12 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import anote_list
-import anote
 import copy
-import sys
-import CTone
-import CHarmony
-import CQuantizedNote
 import MUnderThree
 import MChord
 from MAutoChorus import *
