@@ -3,6 +3,8 @@
 import copy
 import MUnderThree
 import MChord
+import urllib2
+from django.utils import simplejson
 from MAutoChorus import *
 from aeks import aeks
 
@@ -123,6 +125,19 @@ class LyricCard(object):
         del self._chords[0:lyric_start_measure]
 
     def generate(self):
+        url = 'http://c.hatena.com/chris4403/h/243276837852647047.json'
+        try:
+            result = urllib2.urlopen(url)
+            print 'json reading...', '<br/>'
+            print result.read(), '<br/><br/>'
+            print help(simplejson.loads), '<br><br>'
+            # うまく使えない
+            result_dict = simplejson.loads("test", encoding='utf-8')
+            print 'simplejson loaded'
+            print '<br/>', result_dict
+        except urllib2.URLError, e:
+            print 'Error:'
+            print e
         card = ''
         ColumnNum = 4
         chord_text = ['' for i in range(len(self._chords) / ColumnNum + 1)]
