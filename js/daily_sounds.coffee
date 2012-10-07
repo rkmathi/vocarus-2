@@ -16,9 +16,9 @@ $ ->
 
   status = ['before', 'after']
   for i in [0..2]
-    $vcl_editor = $('</p>').append("音源: VOCALOID&trade;2 #{singer_name[day_str[index_today]]}").prependTo(".service_demo:eq(#{i})")
-    $song_name = $('</p>').append("曲名: #{songs_name[index_today][i]}").prependTo(".service_demo:eq(#{i})")
+    $('</p>').append("音源: VOCALOID&trade;2 #{singer_name[day_str[index_today]]}").prependTo(".service_demo:eq(#{i})")
+    $('</p>').append("曲名: #{songs_name[index_today][i]}").prependTo(".service_demo:eq(#{i})")
     for j in [0..1]
-      $('source:even').eq(i * 2 + j).attr({src: "audio/#{day_str[index_today]}#{i}_#{status[j]}.ogg", type: "audio/ogg"})
-      $('source:odd').eq(i * 2 + j).attr({src: "audio/#{day_str[index_today]}#{i}_#{status[j]}.mp3", type: "audio/mpeg"})
+      $('.service_text').eq(i*2+j).after("<audio class='service_audio' controls><source src='audio/#{day_str[index_today]}#{i}_#{status[j]}.ogg' type='audio/ogg'><source src='audio/#{day_str[index_today]}#{i}_#{status[j]}.mp3' type='audio/mpeg'></audio>")
+
   return
