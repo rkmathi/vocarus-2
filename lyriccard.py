@@ -1,14 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import anote_list
-import anote
 import copy
-import autochorus.CTone
-import autochorus.CHarmony
-import autochorus.CQuantizedNote
-import autochorus.MUnderThree
-import autochorus.MChord
-from autochorus.MAutoChorus import *
+import MUnderThree
+import MChord
+from MAutoChorus import *
 from aeks import aeks
 
 class LyricCard(object):

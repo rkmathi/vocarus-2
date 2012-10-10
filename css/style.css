@@ -18,8 +18,8 @@ audio {
 }
 
 .clearfix:after {
-  content: ""; 
-  display: block; 
+  content: "";
+  display: block;
   clear: both;
 }
 
@@ -97,7 +97,7 @@ footer section {
   border-radius: 5px;
   behavior: url(border-radius.htc);
   line-height:23px;
-  margin-bottom:20px;	
+  margin-bottom:20px;
 }
 
 .footer_bg {
@@ -118,10 +118,26 @@ footer section {
 
 .miku_image {
   width:560px;
-  height:603px; 
+  height:603px;
   position:relative;
   top: -20px;
   left: -20px;
+}
+
+.gumi_image {
+    width:303px;
+    height:677px;
+    position:relative;
+    top:-10px;
+    left:80px;
+}
+
+.luka_image {
+    width:319px;
+    height:629px;
+    position:relative;
+    top:-20px;
+    left:70px;
 }
 
 nav {
@@ -215,11 +231,11 @@ nav {
 }
 
 .sub_content {
-	height:230px;
+ height:230px;
 }
 
 .news {
-  height:230px;	
+  height:230px;
   overflow:auto;
   margin:5px;
 }
@@ -287,32 +303,32 @@ nav {
 }
 
 #upload {
-	float:left;
-	position: relative;
-	overflow: hidden;
-	height:28px;
-	width:39px;	
+ float:left;
+ position: relative;
+ overflow: hidden;
+ height:28px;
+ width:39px;
 }
 
 #upload_image {
-	position: absolute;
-	top: 0;
-	left: 0;
+ position: absolute;
+ top: 0;
+ left: 0;
 }
 
 #upload_form {
-	position: absolute;
-	top: 0;
-	right: 0;
-	height: 28px;
-	filter: alpha(opacity = 0);
-	opacity: 0;
-	z-index: 1;
-	cursor: pointer;
+ position: absolute;
+ top: 0;
+ right: 0;
+ height: 28px;
+ filter: alpha(opacity = 0);
+ opacity: 0;
+ z-index: 1;
+ cursor: pointer;
 }
 
 .create_content p {
-	padding:2px;
+ padding:2px;
 }
 
 #files_info {
@@ -325,7 +341,7 @@ nav {
 }
 
 .download {
-	float:right;
+ float:right;
 }
 
 #hand {
@@ -379,24 +395,24 @@ nav {
 }
 
 .subspan{
-	font-size:14px;
-	color:#999;
+ font-size:14px;
+ color:#999;
 }
 
 .alertspan{
-	font-size:16px;
-	font-weight:bold;
-	color:#fb0;
+ font-size:16px;
+ font-weight:bold;
+ color:#fb0;
 }
 
 /* CSS IE 8 only */
 .ie {
-	zoom:1;
-	overflow: scroll-y;
+ zoom:1;
+ overflow: scroll-y;
 }
 
 .ie a * {
-	cusor: pointer;
+ cusor: pointer;
 }
 
 .ie .nv{
@@ -421,17 +437,17 @@ nav {
 }
 
 .ie .footer_bg{
-	background-color:#333;
+ background-color:#333;
 }
 
 .ie .create{
-	float:left;
-	width:620px;
-	height:300px;
+ float:left;
+ width:620px;
+ height:300px;
 }
 
 .ie .create_content{
-	height:230px;
+ height:230px;
 }
 
 .ie td {
