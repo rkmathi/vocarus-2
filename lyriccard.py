@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import MUnderThree
-import MChord
-from MAutoChorus import *
+import autochorus.MUnderThree
+import autochorus.MChord
+from autochorus.MAutoChorus import *
 from aeks import aeks
 
 class LyricCard(object):
