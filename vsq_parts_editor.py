@@ -101,5 +101,3 @@ class VsqPartsEditor(object):
     def generate_chordtext(self):
         lyric_card = LyricCard(self.current_track.anotes, self.nn, self.dd)
         return lyric_card.generate()
-
-
