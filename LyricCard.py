@@ -126,13 +126,20 @@ class LyricCard(object):
         del self._chords[0:lyric_start_measure]
 
     def generate(self):
-        url = 'http://c.hatena.com/chris4403/h/243276837852647047.json'
+        text = 'ナツモチイカズクハアチジュウハチヤ'
+        print text
+        url = ''.join(('http://lpm11.net:4567/translate?text=',
+            urllib2.quote(text)))
+        print url
         try:
             json = urllib2.urlopen(url).read()
             print 'json reading...', '<br/>'
             result = simplejson.loads(json, encoding='utf-8')
             print 'simplejson loaded'
             print '<br/>', result
+            result_test = ''
+            result_test = ' '.join(w for x in result for w in x)
+            print result_test
         except urllib2.URLError, e:
             logging.warn(e)
         card = ''
