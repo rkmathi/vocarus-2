@@ -128,8 +128,16 @@ footer section {
     width:303px;
     height:677px;
     position:relative;
-    top:-10px;
+    top:-20px;
     left:80px;
+}
+
+.mikustand_image {
+    width:406px;
+    height:603px;
+    position:relative;
+    top:-10px;
+    left:40px;
 }
 
 .luka_image {
