@@ -1,16 +1,18 @@
 $ ->
   StartDate = new Date(2012, 9, 5)
   diff = parseInt((new Date().getTime() / 1000 - StartDate.getTime() / 1000) / (60 * 60 * 24))
-  index_today = diff % 3
-  day_str = ['miku', 'gumi', 'luka']
+  index_today = if diff % 4 isnt 2 then diff % 4 else 0
+  day_str = ['miku', 'gumi', '_miku', 'luka']
   singer_name =
     'miku': '初音ミク'
     'gumi': 'GUMI'
+    '_miku': '_初音ミク'
     'luka': '巡音ルカ'
 
   songs_name = [
     ["夕焼け小焼け", "ロンドン橋落ちた", "シャボン玉"]
     ["きらきら星", "どんぐりころころ","さくら"]
+    ["_"]
     ["あめふり", "ひなまつり", "荒城の月"]
   ]
 
