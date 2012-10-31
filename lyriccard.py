@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import autochorus.MUnderThree
-import autochorus.MChord
-from autochorus.MAutoChorus import *
-from aeks import aeks
+import autochorus.MAutoChorus as MAutoChorus
+import autochorus.MChord as MChord
+import autochorus.MUnderThree as MUnderThree
+import aeks
 
 class LyricCard(object):
     """Generate Lyric Card
@@ -15,15 +15,16 @@ class LyricCard(object):
         self._dd = 2 ** dd
         self._anotes = copy.deepcopy(anotes)
         soprano_notes = [anote.note for anote in self._anotes]
-        self._key = aeks(soprano_notes)
+        self._key = aeks.aeks(soprano_notes)
         self._lyrics = []
         self._chords = []
         self.__chord_and_length()
 
     def __chord_and_length(self):
-        self._minimumunit = 1920 / self._nn  #分解脳を拍子の分母(?)で割りますー(全音＝1920)
-        qNList = noteQuantization(self._anotes, self._minimumunit)
-        hamList = melodyrestoration(self._anotes, qNList, self._key, self._dd, self._nn)
+        #分解脳を拍子の分母(?)で割りますー(全音＝1920)
+        self._minimumunit = 1920 / self._nn
+        qNList = MAutoChorus.noteQuantization(self._anotes, self._minimumunit)
+        hamList = MAutoChorus.melodyrestoration(self._anotes, qNList, self._key, self._dd, self._nn)
         MChord.autoChord(hamList)
         MUnderThree.autoUnderThree(hamList)
         self._CLList = [{'Chord': ham.chord, 'Length': ham.length} for ham in hamList]
@@ -140,4 +141,3 @@ class LyricCard(object):
             card += lyric_text[i] + '\n'
             card += '\n'
         return card
-
