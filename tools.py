@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
 import pprint
-from struct import *
+import struct
 
 #歌詞=>発音記号の変換テーブル
 phonetic_table = {
@@ -143,7 +143,7 @@ def dtime2binary(dtime):
         b = calc_1b(dtime)
         bins.insert(0, b)
         dtime >>= 7
-    binary = pack(str(len(bins)) + "B", *bins) if bins else "\x00"
+    binary = struct.pack(str(len(bins)) + "B", *bins) if bins else "\x00"
     return binary
 
 

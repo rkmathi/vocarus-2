@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import re
+import struct
 import tools
 from anote import *
 from singer import *
-from struct import *
 from autochorus.MAutoChorus import execAutoChorus
 from aeks import aeks
 import variable
@@ -205,14 +205,14 @@ class NormalTrack(object):
         """
         #トラックチャンクヘッダの解析
         data = {
-            "MTrk": unpack(">4s", fp.read(4))[0],
-            "size": unpack('>i', fp.read(4))[0],
+            "MTrk": struct.unpack(">4s", fp.read(4))[0],
+            "size": struct.unpack('>i', fp.read(4))[0],
             "text": '',
             "cc_data": []}
         #MIDIイベントの解析
         while True:
             dtime = tools.get_dtime(fp)
-            mevent = unpack('3B', fp.read(3))
+            mevent = struct.unpack('3B', fp.read(3))
             if mevent[1] == 0x2f:
                 data['eot'] = tools.dtime2binary(dtime) + '\xff\x2f\x00'
                 break
@@ -244,23 +244,23 @@ class NormalTrack(object):
         track_header = ''
         binary = ''
         # トラック名の変換
-        binary += pack('4B', 0x00, 0xff, 0x03, len(data['name'])) + data['name']
+        binary += struct.pack('4B', 0x00, 0xff, 0x03, len(data['name'])) + data['name']
         # テキストデータの変換
         text = self.__unparse_text()
         #step = 119
         step = 127 - len("DM:....:")
         for i in range(0, len(text) - 1, step):
             frame = min(step, len(text) - i)
-            binary += pack("4B", 0x00, 0xff, 0x01, frame + 8)
+            binary += struct.pack("4B", 0x00, 0xff, 0x01, frame + 8)
             binary += "DM:%04d:" % (i / step) + text[i:i + frame]
         # コントロールチェンジイベントの変換
         for b in data['cc_data']:
             binary += tools.dtime2binary(b['dtime'])
-            binary += pack('3B', *b['cc'])
+            binary += struct.pack('3B', *b['cc'])
         # End of Track
         binary += data['eot']
         # MTrk と トラックサイズの再計算
-        track_header = pack(
+        track_header = struct.pack(
             '>4sI',
             data['MTrk'],
             len(binary)

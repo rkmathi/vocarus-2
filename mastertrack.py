@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 
+import struct
 import tools
-from struct import *
 
 class MasterTrack(object):
     """vsqファイル中のマスタートラック部分を扱うクラス
@@ -36,14 +36,14 @@ class MasterTrack(object):
         """
         #トラックチャンクヘッダの解析
         data = {
-            "MTrk": unpack(">4s", fp.read(4))[0],
-            "size": unpack('>i', fp.read(4))[0],
+            "MTrk": struct.unpack(">4s", fp.read(4))[0],
+            "size": struct.unpack('>i', fp.read(4))[0],
             "metaevents": []}
 
         #MIDIイベントの解析
         while True:
             dtime = tools.get_dtime(fp)
-            midi = unpack('3B', fp.read(3))
+            midi = struct.unpack('3B', fp.read(3))
             mevent = {
                     'dtime': dtime,
                     'type': midi[1],
@@ -54,11 +54,11 @@ class MasterTrack(object):
             if t == 0x2f:    # End of Trak
                 break
             elif t == 0x51:  # Tempo
-                self.tempo = unpack('>I', '\x00' + mevent['data'])[0]
+                self.tempo = struct.unpack('>I', '\x00' + mevent['data'])[0]
             elif t == 0x03:  # Track Name
                 self.name = mevent['data']
             elif t == 0x58:  # Beat
-                self.beat = unpack('4b', mevent['data'])
+                self.beat = struct.unpack('4b', mevent['data'])
         self.data = data
 
     def unparse(self):
@@ -68,18 +68,18 @@ class MasterTrack(object):
             マスタートラックバイナリ
         """
         data = self.data
-        binary = 'MTrk' + pack('>I', data['size'])
+        binary = 'MTrk' + struct.pack('>I', data['size'])
         for event in data['metaevents']:
             binary += tools.dtime2binary(event['dtime'])
-            binary += pack('cBB', '\xff', event['type'], event['len'])
+            binary += struct.pack('cBB', '\xff', event['type'], event['len'])
             t = event['type']
             if t == 0x2f:    # End of Track
                 pass
             elif t == 0x51:  # Tempo
-                binary += pack('>I', self.tempo)[1:]
+                binary += struct.pack('>I', self.tempo)[1:]
             elif t == 0x03:  # Track Name
                 binary += self.name
             elif t == 0x58:  # Beat
-                binary += pack('4b', *self.beat)
+                binary += struct.pack('4b', *self.beat)
         return binary
 

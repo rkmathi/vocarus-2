@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 #歌詞=>発音記号の変換テーブル
 phonetic_table = {
