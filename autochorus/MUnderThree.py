@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import math
-import CHarmony
 import CTone
 
 def autoUnderThree(hamList):

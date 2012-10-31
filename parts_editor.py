@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 
-from tools import *
-from normaltrack import *
-from mastertrack import *
-from header import *
-from struct import *
-from autochorus.MAutoChorus import *
-from lyriccard import *
-from google.appengine.api import mail
-from google.appengine.api import memcache
 import datetime
+from google.appengine.api import mail, memcache
+from lyriccard import *
+from mastertrack import *
+from normaltrack import *
+from tools import *
+import header
 
 class JST(datetime.tzinfo):
+    """ UTCを日本標準時にするクラス
+    """
     def utcoffset(self,dt):
         return datetime.timedelta(hours=9)
     def dst(self,dt):
@@ -20,9 +19,8 @@ class JST(datetime.tzinfo):
         return "JST"
 
 class PartsEditor(object):
-    """パートの操作をするクラス
+    """ パートの操作をするクラス
     """
-    
     def __init__(self, part, filename=None, binary=None):
         if filename:
             self.parse(part, filename=filename)
@@ -34,14 +32,14 @@ class PartsEditor(object):
         return self.current_track.anotes
 
     def parse(self, part, filename=None, binary=None):
-        """VSQファイルをパースする
+        """ VSQファイルをパースする
         Args:
             part: part data
             filename: VSQファイルのパス
             binary: VSQファイルのバイナリデータ
         """
         self._fp = open(filename, 'r') if filename else tools.FakeFile(binary)
-        self.header = Header(self._fp)
+        self.header = header.Header(self._fp)
         self.master_track = MasterTrack(self._fp)
         track_num = self.header.data['track_num'] - 1
         self._part = part
@@ -64,7 +62,7 @@ class PartsEditor(object):
         self.select_track(0)
     
     def unparse(self, filename=None):
-        """現在のデータをアンパースして、VSQファイルとして書きこむ
+        """ 現在のデータをアンパースして、VSQファイルとして書きこむ
         Args:
             filename: 書き込むVSQファイルのパス
         Returns:
@@ -90,7 +88,7 @@ class PartsEditor(object):
             return binary
     
     def select_track(self, n):
-        """操作対象トラックを変更する
+        """ 操作対象トラックを変更する
         Args:
             n: トラック番号
         """

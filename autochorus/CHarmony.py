@@ -1,7 +1,8 @@
 #coding: UTF-8
+
 import CTone
 
-class CHarmony:
+class CHarmony(object):
 	def __init__(self, length, key, sop):
 		gomi = CTone.CTone(-1,0)
 

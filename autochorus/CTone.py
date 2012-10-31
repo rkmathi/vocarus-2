@@ -1,6 +1,6 @@
 #coding: UTF-8
 
-class CTone:
+class CTone(object):
 	def __init__(self, notenum, key):
 		self.key = key											#調だよ
 		#print notenum

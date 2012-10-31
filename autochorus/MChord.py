@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-import CHarmony
-import CTone
 
 def autoChord(hamList):
     solutionSpace = 3

@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
 
-import anote_list
-import anote
 import copy
 import math
-import sys
 import CTone
 import CHarmony
 import CQuantizedNote
@@ -15,7 +12,6 @@ def execAutoChorus_dumy(anotes):
     result = []
     for part in range(0, 4):
         result.append(copy.deepcopy(anotes))
-
     for soprano in result[0]:
         soprano.note = 84
     for soprano in result[1]:
@@ -24,12 +20,11 @@ def execAutoChorus_dumy(anotes):
         soprano.note = 76
     for soprano in result[3]:
         soprano.note = 72
-
     return result
 
 
-#引数はanotes, 調, 分子, 分母
 def execAutoChorus(anotes ,key, numerator, denominator):
+    #引数はanotes, 調, 分子, 分母
     minimumunit = 1920 / denominator  #分解脳を拍子の分母で割りますー(全音＝1920)
     qNList = noteQuantization(anotes, minimumunit)
     hamList = melodyrestoration(anotes, qNList, key, denominator, numerator)
@@ -46,9 +41,6 @@ def noteQuantization(anotes, minimumunit):
 
     listLen = int(math.ceil(float(anotes[len(anotes) - 1].get_end()) /
                   minimumunit))
-# !! !! !! !! !! !! !! !! !! !! !! !!
-    #print "<br /><br />listLen",listLen,"<br /><br />"
-# !! !! !! !! !! !! !! !! !! !! !! !!
     qNList = []     #りすと
 
     qnote = CQuantizedNote.CQuantizedNote()
@@ -62,8 +54,6 @@ def noteQuantization(anotes, minimumunit):
             if(qnote.downBeat == -1):
                 qnote.downBeat = notename
             qnote.tickSum[notename]+=anotes[noteidx].get_length()
-            #print anotes[noteidx].get_length()
-            #print u"(^^) < ", notename,noteidx
             noteidx += 1
 
         if(notename != -1): #無音の場合ははみ出し処理しないですー
@@ -93,7 +83,7 @@ def melodyrestoration(anotes, qNList, key, denominator, numerator):
     #    print q.downBeat
 # !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
     for bi in range(0, bar):
-        melidyrestration_unit(qNList, sopList, bi*numerator,
+        melodyrestration_unit(qNList, sopList, bi*numerator,
                               numerator, minimumunit)
     noteidx = 0
     noteidx_max = len(anotes)
@@ -115,18 +105,11 @@ def melodyrestoration(anotes, qNList, key, denominator, numerator):
 
         tone_sop = CTone.CTone(sop_notenumber, key)
         hamList.append(CHarmony.CHarmony(sop[1]/minimumunit, key, tone_sop))
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-        #print sopList
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
     return hamList
 
 
-def melidyrestration_unit(qNList, sopList, qnote_index, numerator, minimumunit):
+def melodyrestration_unit(qNList, sopList, qnote_index, numerator, minimumunit):
     nonkey = -1
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-    #print "numerator=>", numerator,"<br />"
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-
     qnote_unit = CQuantizedNote.CQuantizedNote()
     for beat in range(0, numerator):
         qnote_unit += qNList[qnote_index + beat]
@@ -134,52 +117,34 @@ def melidyrestration_unit(qNList, sopList, qnote_index, numerator, minimumunit):
     soprano_note = qnote_unit.detthresholdnote(minimumunit*numerator/2)
 
     if soprano_note == -1:
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-        #print numerator
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
         assert (numerator > 0 or numerator <= 4) #無理なのです；
         if numerator == 4:
             #強拍不一致
             if qNList[qnote_index].downBeat != qNList[qnote_index + 2].downBeat:
-                melidyrestration_unit(qNList, sopList, qnote_index, 2,
+                melodyrestration_unit(qNList, sopList, qnote_index, 2,
                                       minimumunit)
-                melidyrestration_unit(qNList, sopList, qnote_index+2, 2,
+                melodyrestration_unit(qNList, sopList, qnote_index+2, 2,
                                       minimumunit)
             else:
                 soprano_note = qNList[qnote_index].downBeat
                 sopList.append((soprano_note, minimumunit*numerator))
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-                #print "<br />APPEND4<br /><br />"
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
         elif numerator == 3:
-            melidyrestration_unit(qNList, sopList, qnote_index   , 1,
+            melodyrestration_unit(qNList, sopList, qnote_index   , 1,
                                   minimumunit)
-            melidyrestration_unit(qNList, sopList, qnote_index+1 , 1,
+            melodyrestration_unit(qNList, sopList, qnote_index+1 , 1,
                                   minimumunit)
-            melidyrestration_unit(qNList, sopList, qnote_index+2 , 1,
+            melodyrestration_unit(qNList, sopList, qnote_index+2 , 1,
                                   minimumunit)
         elif numerator == 2:
-            melidyrestration_unit(qNList, sopList, qnote_index   , 1,
+            melodyrestration_unit(qNList, sopList, qnote_index   , 1,
                                   minimumunit)
-            melidyrestration_unit(qNList, sopList, qnote_index+1 , 1,
+            melodyrestration_unit(qNList, sopList, qnote_index+1 , 1,
                                   minimumunit)
         elif numerator == 1:
             soprano_note = qNList[qnote_index].downBeat
             sopList.append((soprano_note, minimumunit*numerator))
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-            #print "<br />APPEND1<br /><br />"
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
     else :
-        #soprano_note = qNList[qnote_index].downBeat
         sopList.append((soprano_note, minimumunit*numerator))
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-        #print "<br />APPEND0<br /><br />"
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
-    #print "sopList",sopList,"<br />"
-    #print "return-soprano_note, downBeat=>", soprano_note, qNList[qnote_index].downBeat, "<br />"
-# !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! !!! #
     return
 
 
@@ -195,9 +160,6 @@ def mapping(anoteList, hamList, minimumunit): #まっぴんぐ♪
         while anoteList[i].get_start() >= (hamList[ham_cnt].length*minimumunit + ham_pos):
             ham_pos += hamList[ham_cnt].length * minimumunit
             ham_cnt += 1
-        #    print "start:", anoteList[i].get_start()
-        #    print "i:", i
-        #    print ham_cnt, ham_pos
         # こっちは必ず正の値をとりましう
         len1 = (hamList[ham_cnt].length*minimumunit+ham_pos) -\
                 anoteList[i].get_start()
@@ -212,13 +174,9 @@ def mapping(anoteList, hamList, minimumunit): #まっぴんぐ♪
         #こっちが普通～
         else:
             nexco = 0
-        #print "len1", len1, "len2", len2, "ahe", hamList[ham_cnt].
-        #                                         note[3].getNoteNumber()
 
         for part in range(0, 4):
             if hamList[ham_cnt+nexco].note[part].getNoteNumber() != -1:
                 result[part][i].note = hamList[ham_cnt+nexco].note[part].getNoteNumber()
-                #result[part][i].note = hamList[ham_cnt+0].note[part].getNoteNumber()
 
     return result
-

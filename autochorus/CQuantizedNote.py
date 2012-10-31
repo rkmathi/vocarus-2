@@ -1,6 +1,6 @@
 #coding: UTF-8
 
-class CQuantizedNote:
+class CQuantizedNote(object):
 	def __init__(self):
 		self.tickSum = []	#合計tick値
 		self.downBeat = -1;	#強拍判定（音名）
