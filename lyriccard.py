@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import aeks
 import autochorus.MUnderThree
 import autochorus.MChord
 from autochorus.MAutoChorus import *
+from aeks import aeks
 
 class LyricCard(object):
     """Generate Lyric Card
@@ -15,7 +15,7 @@ class LyricCard(object):
         self._dd = 2 ** dd
         self._anotes = copy.deepcopy(anotes)
         soprano_notes = [anote.note for anote in self._anotes]
-        self._key = aeks.aeks(soprano_notes)
+        self._key = aeks(soprano_notes)
         self._lyrics = []
         self._chords = []
         self.__chord_and_length()
