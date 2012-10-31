@@ -7,7 +7,6 @@ from singer import *
 from struct import *
 from autochorus.MAutoChorus import execAutoChorus
 from aeks import aeks
-from vsq_parts_editor import *
 import variable
 import main
 

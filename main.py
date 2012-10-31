@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import os
-import logging
-import simplejson as json
 from google.appengine.ext import webapp
 from google.appengine.api import memcache
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
-from vsq_parts_editor import *
+from parts_editor import *
 
 class IndexPage(webapp.RequestHandler):
     def get(self):
@@ -85,13 +83,13 @@ class ParsePage(webapp.RequestHandler):
                 is_score = True
 
             if is_score == True:
-                editor = VsqPartsEditor(parts, binary =data)
+                editor = PartsEditor(parts, binary = data)
                 self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
                 self.response.headers['Content-disposition'] = (
                 u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u'.txt')
                 self.response.out.write(editor.generate_chordtext())
             else:
-                editor = VsqPartsEditor(parts, binary = data)
+                editor = PartsEditor(parts, binary = data)
                 memcache.set_multi(
                     {"editor": editor, "name": file_name, "part": parts},
                     key_prefix="vsq_",
@@ -105,7 +103,6 @@ class ParsePage(webapp.RequestHandler):
             #path = os.path.join(os.path.dirname(__file__), 'parse.html')
             #self.response.out.write(template.render(path, template_values))
             # !!! Download !!!
-                
                 self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
                 self.response.headers['Content-disposition'] = (
                     u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u' [part.%d].vsq' % parts)

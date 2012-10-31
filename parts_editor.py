@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from vsq_parts import *
 from tools import *
 from normaltrack import *
 from mastertrack import *
@@ -20,7 +19,7 @@ class JST(datetime.tzinfo):
     def tzname(self,dt):
         return "JST"
 
-class VsqPartsEditor(object):
+class PartsEditor(object):
     """パートの操作をするクラス
     """
     
