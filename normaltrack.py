@@ -2,13 +2,12 @@
 
 import re
 import struct
-import tools
 from anote import *
 from singer import *
 from autochorus.MAutoChorus import execAutoChorus
 from aeks import aeks
 import variable
-import main
+import tools
 
 class NormalTrack(object):
     """ノーマルトラック（マスタートラック以外）を扱うクラス

@@ -178,8 +178,3 @@ class Anote(object):
             詳細イベント形式の歌詞データ
         """
         return self.vibrato
-
-
-if __name__ == '__main__':
-    anotes = AnoteList()
-

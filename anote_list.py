@@ -122,12 +122,6 @@ class AnoteList(list):
         string = u''.join([a.lyric for a in self[:i]])
         return i + len(re.findall(u"[ぁぃぅぇぉゃゅょ]", string))
 
-    def __lyric_index2index(self, i):
-        return i - len(re.findall(u"[ぁぃぅぇぉゃゅょ]", self.lyrics[:i]))
-
-    def __getslice__(self, i, j):
-        return AnoteList(super(AnoteList, self).__getslice__(i, j))
-
     def split(self, distance=50):
         """distance時間以上離れているAnoteで区切る
 
@@ -145,6 +139,12 @@ class AnoteList(list):
         anote_lists.append(self[buf:])
         return anote_lists
 
+    def __lyric_index2index(self, i):
+        return i - len(re.findall(u"[ぁぃぅぇぉゃゅょ]", self.lyrics[:i]))
+
+    def __getslice__(self, i, j):
+        return AnoteList(super(AnoteList, self).__getslice__(i, j))
+
     @property
     def lyrics(self):
         return u''.join([a.lyric for a in self])
@@ -156,4 +156,3 @@ class AnoteList(list):
     @property
     def relative_notes(self):
         return [0] + [a.note-self[i].note for i,a in enumerate(self[1:])]
-
