@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-from struct import *
+import struct
 
 class Header(object):
     """MIDIヘッダを扱うクラス
@@ -24,11 +24,11 @@ class Header(object):
         fp:vsqファイルポインタ or FakeFileインスタンス
         """
         data = {
-            'MThd': unpack('>4s', fp.read(4))[0],
-            'size': unpack('>i', fp.read(4))[0],
-            'format': unpack('>h', fp.read(2))[0],
-            'track_num': unpack('>h', fp.read(2))[0],
-            'time_div': unpack('>h', fp.read(2))[0]}
+            'MThd': struct.unpack('>4s', fp.read(4))[0],
+            'size': struct.unpack('>i', fp.read(4))[0],
+            'format': struct.unpack('>h', fp.read(2))[0],
+            'track_num': struct.unpack('>h', fp.read(2))[0],
+            'time_div': struct.unpack('>h', fp.read(2))[0]}
         self.data = data
 
     def unparse(self):
@@ -36,7 +36,7 @@ class Header(object):
 
         Returns: MIDIヘッダバイナリ
         """
-        binary = pack(
+        binary = struct.pack(
             ">4si3h",
             self.data['MThd'],
             self.data['size'],
