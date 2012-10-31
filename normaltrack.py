@@ -5,9 +5,9 @@ import struct
 from anote import *
 from singer import *
 from autochorus.MAutoChorus import execAutoChorus
-from aeks import aeks
-import variable
+import aeks
 import tools
+import variable
 
 class NormalTrack(object):
     """ノーマルトラック（マスタートラック以外）を扱うクラス
@@ -174,7 +174,7 @@ class NormalTrack(object):
         for i in range(0, len(anotes)):
             soprano_notes.append(anotes[i].note)
         # !!! execAutoChorus(anotes, 調, 分子, 分母)[パート] をpack !!!
-        packed = execAutoChorus(anotes, aeks(soprano_notes),
+        packed = execAutoChorus(anotes, aeks.aeks(soprano_notes),
                                 self._nn, self._dd)[self._part] + singers
         packed.sort(key=lambda x: int(x.start))
         details = []

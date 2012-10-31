@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-def majorpentatonic(code, note_list):
+def __majorpentatonic(code, note_list):
     note_names = {'c':0, 'cis':1, 'd':2, 'dis':3, 'e':4, 'f':5,
                  'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
     inter2 = [2, 2, 3, 2, 0]
@@ -13,7 +13,7 @@ def majorpentatonic(code, note_list):
             tmp += inter2[k]
     return count
 
-def minorpentatonic(code, note_list):
+def __minorpentatonic(code, note_list):
     note_names = {'c':0, 'cis':1, 'd':2, 'dis':3, 'e':4, 'f':5,
                  'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
     inter2 = [3, 2, 2, 4, 0]
@@ -81,7 +81,7 @@ def aeks(notes):
                     count += 1
                 code += majorinter[j]
         if count == len(note2_list):
-            penta = majorpentatonic(note_names[note2_list[i][0]], note2_list)
+            penta = __majorpentatonic(note_names[note2_list[i][0]], note2_list)
             if max[1] < penta:
                 max[0] = note_names[note2_list[i][0]]
                 max[1] = penta
@@ -96,7 +96,7 @@ def aeks(notes):
                         count += 1
                     code += minorinter[j]
             if count == len(note2_list):
-                penta = minorpentatonic(note_names[note2_list[i][0]], note2_list)
+                penta = __minorpentatonic(note_names[note2_list[i][0]], note2_list)
                 if max[1] < penta:
                     max[0] = note_names[note2_list[i][0]]
                     max[1] = penta

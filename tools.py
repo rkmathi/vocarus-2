@@ -35,13 +35,11 @@ phonetic_table = {
         u"でぃ": u"d' i", u"でゅ": u"d' M",
         u"びゃ": u"b' a", u"びゅ": u"b' M", u"びぇ": u"b' e", u"びょ": u"b' o",
         u"ぴゃ": u"p' a", u"ぴゅ": u"p' M", u"ぴぇ": u"p' e", u"ぴょ": u"p' o",
-
         u"てゃ": u"t' a", u"てぃ": u"t' i", u"てゅ": u"t' M", u"てぇ": u"t' e", u"てょ": u"t' o"
     }
 
 #発音記号=>歌詞（ひらがな）の変換テーブル
 lyric_table = dict(zip(phonetic_table.values(), phonetic_table.keys()))
-
 
 #ローマ字の歌詞が入力されたとき用に更新
 phonetic_table.update({
@@ -208,4 +206,3 @@ class FakeFile(object):
             現在の読み出し開始インデックス
         """
         return self._index
-
