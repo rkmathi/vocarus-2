@@ -7,6 +7,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from parts_editor import *
 
+# vocarus.net/
 class IndexPage(webapp.RequestHandler):
     def get(self):
         template_values = {}
@@ -14,13 +15,14 @@ class IndexPage(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 
+# vocarus.net/service
 class ContentPage1(webapp.RequestHandler):
     def get(self):
         template_values = {}
         path = os.path.join(os.path.dirname(__file__), 'service.html')
         self.response.out.write(template.render(path, template_values))
 
-
+# vocarus.net/howtouse
 class ContentPage2(webapp.RequestHandler):
     def get(self):
         template_values = {}
@@ -28,6 +30,7 @@ class ContentPage2(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 
+# vocarus.net/contact
 class ContentPage3(webapp.RequestHandler):
     def get(self):
         template_values = {}
@@ -35,15 +38,7 @@ class ContentPage3(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 
-""" agreement.html
-class ContentPage4(webapp.RequestHandler):
-    def get(self):
-        template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'agreement.html')
-        self.response.out.write(template.render(path, template_values))
-"""
-
-
+# Failed to parse vsq/vsqx ==> parse error
 class ParseError1(webapp.RequestHandler):
     def get(self):
         template_values = {}
@@ -51,6 +46,7 @@ class ParseError1(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 
+# Failed to parse vsq/vsqx ==> file not found
 class ParseError2(webapp.RequestHandler):
     def get(self):
         template_values = {}
@@ -58,6 +54,7 @@ class ParseError2(webapp.RequestHandler):
         self.response.out.write(template.render(path, template_values))
 
 
+# vocarus.net/parse
 class ParsePage(webapp.RequestHandler):
     def post(self):
         data = self.request.get('file')
@@ -121,6 +118,7 @@ class ParsePage(webapp.RequestHandler):
             self.response.out.write(template.render(path, template_values))
 
 
+# vocarus.net/download
 class DownloadPage(webapp.RequestHandler):
     def post(self):
         editor = memcache.get('vsq_editor')
@@ -137,12 +135,12 @@ class DownloadPage(webapp.RequestHandler):
             self.response.out.write(editor.unparse())
 
 
+# Pages
 application = webapp.WSGIApplication(
                 [('/', IndexPage),
                 ('/service', ContentPage1),
                 ('/howtouse', ContentPage2),
                 ('/contact', ContentPage3),
-                # ('/agreement', ContentPage4),
                 ('/parse', ParsePage),
                 ('/parse_error', ParseError1),
                 ('/parse_error', ParseError2),
@@ -156,4 +154,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-

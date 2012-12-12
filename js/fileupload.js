@@ -11,7 +11,8 @@ function FileUpload(elm_id){
         var tmp = file_name.split(".");
         var t_length = tmp.length;
         var file_type = tmp[t_length - 1];
-        if( file_type == "vsq" || file_type == "VSQ" ) return true;
+        if( file_type == "vsq"  || file_type == "VSQ" ||
+            file_type == "vsqx" || file_type == "VSQX") return true;
         return false;
     };
 

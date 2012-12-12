@@ -2,7 +2,7 @@
 
 def __majorpentatonic(code, note_list):
     note_names = {'c':0, 'cis':1, 'd':2, 'dis':3, 'e':4, 'f':5,
-                 'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
+                  'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
     inter2 = [2, 2, 3, 2, 0]
     count = 0
     for i in range(0, len(note_list)):
@@ -13,9 +13,10 @@ def __majorpentatonic(code, note_list):
             tmp += inter2[k]
     return count
 
+
 def __minorpentatonic(code, note_list):
     note_names = {'c':0, 'cis':1, 'd':2, 'dis':3, 'e':4, 'f':5,
-                 'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
+                  'fis':6, 'g':7, 'gis':8, 'a':9, 'b':10, 'h':11}
     inter2 = [3, 2, 2, 4, 0]
     count = 0
     for i in range(0, len(note_list)):
@@ -26,12 +27,13 @@ def __minorpentatonic(code, note_list):
             tmp += inter2[k]
     return count
 
+
 def aeks(notes):
     """Automatic Estimation of Key Signature
     Args:
-        notes: Soprano notes (IntegerList)
-    Returns:
-        key: Key Signature (Integer)
+        notes:  Soprano notes([int])
+    Rets:
+        key:    Key Signature(int)
     """
 
     # C<-2->D, D<-2->E, E<-1->F, F<-2->G, G<-2->A, A<-2->H
@@ -63,12 +65,6 @@ def aeks(notes):
             note2_list.append([n[0], n[1]])
         else:
             pass
-
-# !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! #
-    #print "note2_list==>",note2_list,"<br/>"
-    #for i in range(0, 7):
-    #    print "note_names[note2_list[",i,"][0]]",note_names[note2_list[i][0]],"<br />"
-# !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! !! #
 
     max = [-1, -1]
 
