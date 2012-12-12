@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
+import cgi
 import os
+import re
 from google.appengine.ext import webapp
 from google.appengine.api import memcache
 from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from parts_editor import *
+import v3editor as V3
 
 # vocarus.net/
 class IndexPage(webapp.RequestHandler):
@@ -66,7 +69,6 @@ class ParsePage(webapp.RequestHandler):
             KeyError      : vsqファイルの破損
             """
             file_name = self.request.body_file.vars['file'].filename.encode('utf-8')
-            #parts = self.request.get('parts')
             is_score = False
             
             if self.request.POST.has_key('chorus1'):
@@ -79,12 +81,20 @@ class ParsePage(webapp.RequestHandler):
                 parts = 0
                 is_score = True
 
+            ### ChordText (VSQ)
             if is_score == True:
                 editor = PartsEditor(parts, binary = data)
                 self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
                 self.response.headers['Content-disposition'] = (
                 u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u'.txt')
                 self.response.out.write(editor.generate_chordtext())
+            ### VSQX
+            elif re.search('.+\.[vV][sS][qQ][xX]$', file_name):
+                #_data = re.sub('/vsq3(?!/)..+', r'/vsq3>', cgi.escape(data))
+                _data = cgi.escape(data)
+                #print _data
+                print V3.V3Editor(_data, parts).parse()
+            ### VSQ
             else:
                 editor = PartsEditor(parts, binary = data)
                 memcache.set_multi(
@@ -97,25 +107,22 @@ class ParsePage(webapp.RequestHandler):
                     'dd' : 2 ** editor.dd}
                 variable.nn = editor.nn
                 variable.dd = 2**editor.nn
-            #path = os.path.join(os.path.dirname(__file__), 'parse.html')
-            #self.response.out.write(template.render(path, template_values))
-            # !!! Download !!!
                 self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
                 self.response.headers['Content-disposition'] = (
                     u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u' [part.%d].vsq' % parts)
                 self.response.out.write(editor.unparse())
-        except (AttributeError): # No files except
+        except (AttributeError): # file is not found
             template_values = { }
             path = os.path.join(os.path.dirname(__file__), 'parse_notfound.html')
             self.response.out.write(template.render(path, template_values))
-        except (ValueError): # Too big!
+        except (ValueError): # file is too big
             template_values = { }
             path = os.path.join(os.path.dirname(__file__), 'parse_toobig.html')
             self.response.out.write(template.render(path, template_values))
-        except: # !! Except Wildcard is NOT recommended !!
-            template_values = { }
-            path = os.path.join(os.path.dirname(__file__), 'parse_error.html')
-            self.response.out.write(template.render(path, template_values))
+        #except: # else
+        #    template_values = { }
+        #    path = os.path.join(os.path.dirname(__file__), 'parse_error.html')
+        #    self.response.out.write(template.render(path, template_values))
 
 
 # vocarus.net/download

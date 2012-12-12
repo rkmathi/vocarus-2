@@ -17,7 +17,7 @@ class V3Editor(object):
             part:   int
         """
         self._part = part
-        self._vsqx = vsqx
+        self._vsqx = (vsqx)
         self.parse()
  
     def parse(self):
@@ -27,7 +27,7 @@ class V3Editor(object):
         Rets:
             notes:  [int]
         """
-        elem = self._vsqx.getroot()
+        elem = ET.fromstring(self._vsqx)
         xmlns = '{http://www.yamaha.co.jp/vocaloid/schema/vsq3/}'
  
         masterTrack=elem.find(xmlns+"masterTrack")
@@ -57,8 +57,6 @@ class V3Editor(object):
 """
 ### FOR DEBUG
 if __name__ == "__main__":
-    print V3Editor(ET.parse(open("../vsqx/kirakira.vsqx", "rt")), 0).parse()
-    print V3Editor(ET.parse(open("../vsqx/kirakira.vsqx", "rt")), 1).parse()
-    print V3Editor(ET.parse(open("../vsqx/kirakira.vsqx", "rt")), 2).parse()
-    print V3Editor(ET.parse(open("../vsqx/kirakira.vsqx", "rt")), 3).parse()
+    _data = open("../vsqx/kirakira.vsqx", "rt").read()
+    print V3Editor(_data, 1).parse()
 """
