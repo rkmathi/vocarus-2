@@ -88,12 +88,15 @@ class ParsePage(webapp.RequestHandler):
                 self.response.headers['Content-disposition'] = (
                 u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u'.txt')
                 self.response.out.write(editor.generate_chordtext())
+            ### ChordText (VSQX)
+                ''' FixMe
+            elif (is_score == True and
+                  re.search('.+\.[vV][sS][qQ][xX]$', file_name)):
+                print("FixMe")
+                '''
             ### VSQX
             elif re.search('.+\.[vV][sS][qQ][xX]$', file_name):
-                #_data = re.sub('/vsq3(?!/)..+', r'/vsq3>', cgi.escape(data))
-                _data = cgi.escape(data)
-                #print _data
-                print V3.V3Editor(_data, parts).parse()
+                print V3.V3Editor(data, parts).parse()
             ### VSQ
             else:
                 editor = PartsEditor(parts, binary = data)
