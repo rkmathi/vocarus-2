@@ -21,23 +21,21 @@ class V3Editor(object):
         self.parse()
  
     def parse(self):
-        """ vsqxファイルを受け取ってコーラスの音程を返す
-        Args:
-            vsqx:   file
+        """ vsqxファイルを受け取ってコーラスのを返す
         Rets:
-            notes:  [int]
+            XMLファイルの文字列
         """
         elem = ET.fromstring(self._vsqx)
         xmlns = '{http://www.yamaha.co.jp/vocaloid/schema/vsq3/}'
  
-        masterTrack=elem.find(xmlns+"masterTrack")
-        timesig=masterTrack.find(xmlns+"timeSig")
- 
-        self._nn = int(timesig.findtext(xmlns+"nume"))
-        self._dd = int(timesig.findtext(xmlns+"denomi"))
- 
+        masterTrack = elem.find(xmlns+"masterTrack")
+        timeSig = masterTrack.find(xmlns+"timeSig")
         vsTrack = elem.find(xmlns + "vsTrack")
         musicalPart = vsTrack.find(xmlns + "musicalPart")
+ 
+        self._nn = int(timeSig.findtext(xmlns+"nume"))
+        self._dd = int(timeSig.findtext(xmlns+"denomi"))
+ 
         anotes = AnoteList()
         for i, note in enumerate(musicalPart.findall(xmlns+"note")):
             time=note.findtext(xmlns+"posTick")     #相対開始時間
@@ -51,8 +49,13 @@ class V3Editor(object):
         notes = [] 
         for p in packed:
             notes.append(p.note)
-        return notes
 
+        for i, note in enumerate(musicalPart.findall(xmlns+"note")):
+            noteNum = note.find(xmlns+"noteNum")
+            noteNum.text = str(notes[i])
+
+        #return ET.dump(elem)
+        return ET.tostring(elem)
 
 """
 ### FOR DEBUG

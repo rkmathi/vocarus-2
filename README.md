@@ -1,14 +1,21 @@
-# vocarus-2 #
+# vocarus #
 
 ## Change Log ##
+
+2012/12/18
+
+> Support vsqx file :)
+
 
 2012/08/06
 
 > Lyric & Code output function
 
+
 2012/07/25
 
 > Deploy vocarus ver. 2
+
 
 2012/07/09
 
