@@ -14,7 +14,7 @@ import v3editor as V3
 class IndexPage(webapp.RequestHandler):
     def get(self):
         template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'index.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/index.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -22,14 +22,14 @@ class IndexPage(webapp.RequestHandler):
 class ContentPage1(webapp.RequestHandler):
     def get(self):
         template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'service.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/service.html')
         self.response.out.write(template.render(path, template_values))
 
 # vocarus.net/howtouse
 class ContentPage2(webapp.RequestHandler):
     def get(self):
         template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'howtouse.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/howtouse.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -37,7 +37,7 @@ class ContentPage2(webapp.RequestHandler):
 class ContentPage3(webapp.RequestHandler):
     def get(self):
         template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'contact.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/contact.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -45,7 +45,7 @@ class ContentPage3(webapp.RequestHandler):
 class ParseError1(webapp.RequestHandler):
     def get(self):
         template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'parse_error.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/parse_error.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -53,7 +53,7 @@ class ParseError1(webapp.RequestHandler):
 class ParseError2(webapp.RequestHandler):
     def get(self):
         template_values = {}
-        path = os.path.join(os.path.dirname(__file__), 'parse_notfound.html')
+        path = os.path.join(os.path.dirname(__file__), 'html/parse_notfound.html')
         self.response.out.write(template.render(path, template_values))
 
 
@@ -89,14 +89,17 @@ class ParsePage(webapp.RequestHandler):
                 u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u'.txt')
                 self.response.out.write(editor.generate_chordtext())
             ### ChordText (VSQX)
-                ''' FixMe
+                ''' FIXME
             elif (is_score == True and
                   re.search('.+\.[vV][sS][qQ][xX]$', file_name)):
-                print("FixMe")
+                print("FIXME")
                 '''
             ### VSQX
             elif re.search('.+\.[vV][sS][qQ][xX]$', file_name):
-                print V3.V3Editor(data, parts).parse()
+                self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
+                self.response.headers['Content-disposition'] = (
+                    u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u' [part%d].vsqx' % parts)
+                self.response.out.write(V3.V3Editor(data, parts).parse())
             ### VSQ
             else:
                 editor = PartsEditor(parts, binary = data)
@@ -112,20 +115,20 @@ class ParsePage(webapp.RequestHandler):
                 variable.dd = 2**editor.nn
                 self.response.headers['Content-Type'] = 'application/x-vsq; charset=Shift_JIS'
                 self.response.headers['Content-disposition'] = (
-                    u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u' [part.%d].vsq' % parts)
+                    u'filename=' + (os.path.splitext(file_name.encode('utf-8'))[0])+u' [part%d].vsq' % parts)
                 self.response.out.write(editor.unparse())
         except (AttributeError): # file is not found
             template_values = { }
-            path = os.path.join(os.path.dirname(__file__), 'parse_notfound.html')
+            path = os.path.join(os.path.dirname(__file__), 'html/parse_notfound.html')
             self.response.out.write(template.render(path, template_values))
         except (ValueError): # file is too big
             template_values = { }
-            path = os.path.join(os.path.dirname(__file__), 'parse_toobig.html')
+            path = os.path.join(os.path.dirname(__file__), 'html/parse_toobig.html')
             self.response.out.write(template.render(path, template_values))
-        #except: # else
-        #    template_values = { }
-        #    path = os.path.join(os.path.dirname(__file__), 'parse_error.html')
-        #    self.response.out.write(template.render(path, template_values))
+        except: # else
+            template_values = { }
+            path = os.path.join(os.path.dirname(__file__), 'html/parse_error.html')
+            self.response.out.write(template.render(path, template_values))
 
 
 # vocarus.net/download
